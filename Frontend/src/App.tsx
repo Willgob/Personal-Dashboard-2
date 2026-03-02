@@ -1,23 +1,24 @@
 import { useState, useEffect} from 'react';
+import { supabase } from './supabase';
 import axios from 'axios';
 import './App.css'
 
 
 function App() {
-  const [test, setTest] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [session, setSession] = useState(null);
+
+  async function signIn() {
+    const {error} = await supabase.auth.signInWithOtp({ email });
+    if (error) setMessage("Error:" + error.message);
+    else setMessage("Link sent! Check your email.");
+
+  }
 
   useEffect(() => {
-    axios
-    .get('http://localhost:8000')
-    .then((response) => setTest(response.data.message))
-    .catch((error) => setTest("Error"))
-  }, []);
-
-  return (
-    <div className="App">
-      <h1>{test}</h1>
-    </div>
-  );
+    supabase.auth.getSession().then(( { data } ))
+  });
 }
 
 
