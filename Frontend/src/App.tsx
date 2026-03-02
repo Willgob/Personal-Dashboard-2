@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react';
 import { supabase } from './supabase';
 import axios from 'axios';
 import './App.css'
-
+import { useUserSettings } from './hooks/useUserSettings';
 
 function App() {
   const [email, setEmail] = useState('');
@@ -39,10 +39,17 @@ function App() {
       </>
     )
   }
+  // const { settings, updateSettings, loading } = useUserSettings(session);
   return (
+    <>
     <h1>Hi test</h1>
+    <h1> User: {session.user.email}</h1>
+    <pre>{JSON.stringify(settings, null,2)}</pre>
+    <button onClick={() => updateSettings({ clicked: true})}>Button</button>
+    </>
   )
-}
+  }
+
 
 
 export default App
