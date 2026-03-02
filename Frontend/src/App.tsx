@@ -17,8 +17,31 @@ function App() {
   }
 
   useEffect(() => {
-    supabase.auth.getSession().then(( { data } ))
-  });
+    supabase.auth.getSession().then(( { data } ) => {
+      setSession(data.session);
+    });
+
+    const { data: listener} = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setSession(session);
+      }
+    );
+
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  if (!session) {
+    return (
+      <>
+        <input type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <button onClick={signIn}>Send Email</button>
+        <p>{message}</p>
+      </>
+    )
+  }
+  return (
+    <h1>Hi test</h1>
+  )
 }
 
 
