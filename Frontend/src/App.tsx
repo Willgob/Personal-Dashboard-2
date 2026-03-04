@@ -29,6 +29,8 @@ function App() {
 
     return () => listener.subscription.unsubscribe();
   }, []);
+  
+  const { settings, updateSettings, loading } = useUserSettings(session);
 
   if (!session) {
     return (
@@ -39,14 +41,13 @@ function App() {
       </>
     )
   }
-  // const { settings, updateSettings, loading } = useUserSettings(session);
   return (
-    <>
+    <div>
     <h1>Hi test</h1>
     <h1> User: {session.user.email}</h1>
     <pre>{JSON.stringify(settings, null,2)}</pre>
-    <button onClick={() => updateSettings({ clicked: true})}>Button</button>
-    </>
+    <button onClick={() => updateSettings({ test: false})}>Button</button>
+    </div>
   )
   }
 

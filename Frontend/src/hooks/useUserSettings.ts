@@ -37,11 +37,16 @@ export function useUserSettings(session) {
         load();
     }, [session]);
 
-    async function updateSettings(newData) {
+    async function updateSettings(newValues) {
         const user=session.user;
+
+        const merged = {
+            ...settings.data,
+            ...newValues,
+        }
         const { data : updated} = await supabase
             .from("user_settings")
-            .update({ data: newData })
+            .update({ data: merged })
             .eq('user_id', user.id)
             .select()
             .single();
