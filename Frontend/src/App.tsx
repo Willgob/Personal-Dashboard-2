@@ -42,8 +42,7 @@ function App() {
     )
   }
 
-  const userEmail = session.user.email;
-  if (userEmail === "william@willgob.com") {
+  if (settings?.data?.isAdmin) {
     return (
       <div>
         <h1>Hi admin  </h1>
