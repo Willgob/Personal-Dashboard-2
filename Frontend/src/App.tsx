@@ -41,12 +41,22 @@ function App() {
       </>
     )
   }
+
+  const userEmail = session.user.email;
+  if (userEmail === "william@willgob.com") {
+    return (
+      <div>
+        <h1>Hi test</h1>
+        <h1> User: {session.user.email}</h1>
+        <pre>{JSON.stringify(settings, null,2)}</pre>
+        <button onClick={() => updateSettings({ test: false})}>Button</button>
+      </div>
+    )
+  }
+
   return (
     <div>
-    <h1>Hi test</h1>
-    <h1> User: {session.user.email}</h1>
-    <pre>{JSON.stringify(settings, null,2)}</pre>
-    <button onClick={() => updateSettings({ test: false})}>Button</button>
+      <h1>Hi {session.user.email}</h1>
     </div>
   )
   }
