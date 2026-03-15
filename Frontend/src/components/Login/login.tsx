@@ -40,7 +40,7 @@ export default function Login({ onLogin, onSignup }: { onLogin: () => void; onSi
     }
 
     return (
-        <div>
+        <div className="main">
             <input type="email" placeholder = "email" value={email} onChange={(e) => setEmail(e.target.value)}/> 
             <input type="password" placeholder = "password" value={password} onChange={(e) => setPassword(e.target.value)}/> 
             {error && <p className="error">{error}</p>}

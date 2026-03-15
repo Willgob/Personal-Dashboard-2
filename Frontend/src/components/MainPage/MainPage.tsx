@@ -16,6 +16,7 @@ export default function MainPage() {
     const [input, setInput] = useState('');
 
     useEffect(() => {
+        // Function load data from user
         async function loaddata() {
             const { data: {user}, error: userError } = await supabase.auth.getUser();
 
