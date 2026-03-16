@@ -7,6 +7,7 @@
 
 <h1>Hi, {data.user.name}!</h1>
 <p>Your user ID is {data.user.id}.</p>
+<p>THE DATA UH HI</p>
 <form method="post" action="?/signOut" use:enhance>
 	<button>Sign out</button>
 </form>
