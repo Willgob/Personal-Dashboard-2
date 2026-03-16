@@ -27,6 +27,6 @@
 <hr />
 <form method="post" action="?/signInSocial" use:enhance>
 	<input type="hidden" name="provider" value="github" />
-	<input type="hidden" name="callbackURL" value="/demo/better-auth" />
+	<input type="hidden" name="callbackURL" value="/better-auth" />
 	<button>Sign in with GitHub</button>
 </form>
