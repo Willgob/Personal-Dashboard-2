@@ -6,7 +6,7 @@ import { APIError } from 'better-auth/api';
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
-		return redirect(302, '/better-auth');
+		return redirect(302, '/home');
 	}
 	return {};
 };
@@ -32,7 +32,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' });
 		}
 
-		return redirect(302, '/better-auth');
+		return redirect(302, '/home');
 	},
 	signUpEmail: async (event) => {
 		const formData = await event.request.formData();
@@ -56,7 +56,7 @@ export const actions: Actions = {
 			return fail(500, { message: 'Unexpected error' });
 		}
 
-		return redirect(302, '/better-auth');
+		return redirect(302, '/home');
 	},
 	signInSocial: async (event) => {
 		const formData = await event.request.formData();
@@ -75,4 +75,4 @@ export const actions: Actions = {
 		}
 		return fail(400, { message: 'Social sign-in failed' });
 	}
-};
+	};

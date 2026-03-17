@@ -6,7 +6,7 @@ import { addData, removeData, getData } from '$lib/server/data';
 
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
-		return redirect(302, '/better-auth/login');
+		return redirect(302, '/login');
 	}
 	const data = await getData(event.locals);
 	return { user: event.locals.user, data };
@@ -37,6 +37,6 @@ export const actions: Actions = {
 		await auth.api.signOut({
 			headers: event.request.headers
 		});
-		return redirect(302, '/better-auth/login');
+		return redirect(302, '/login');
 	}
 };
