@@ -1,4 +1,4 @@
-import { pgTable, serial, integer, text, jsonb,uniqueIndex } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, text, jsonb } from 'drizzle-orm/pg-core';
 
 
 export const task = pgTable('task', {

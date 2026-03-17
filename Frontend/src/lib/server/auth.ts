@@ -4,6 +4,7 @@ import { sveltekitCookies } from 'better-auth/svelte-kit';
 import { env } from '$env/dynamic/private';
 import { getRequestEvent } from '$app/server';
 import { db } from '$lib/server/db';
+import { data } from '$lib/server/db/schema';
 
 export const auth = betterAuth({
 	baseURL: env.ORIGIN,
@@ -14,6 +15,18 @@ export const auth = betterAuth({
 		github: {
 			clientId: env.GITHUB_CLIENT_ID,
 			clientSecret: env.GITHUB_CLIENT_SECRET
+		}
+	},
+	databaseHooks: {
+		session: {
+			create: {
+				after: async (session) => {
+					await db
+						.insert(data)
+						.values({userId: session.userId, data: {} })
+						.onConflictDoNothing({ target: data.userId });
+				}
+			}
 		}
 	},
 	plugins: [sveltekitCookies(getRequestEvent)] // make sure this is the last plugin in the array
