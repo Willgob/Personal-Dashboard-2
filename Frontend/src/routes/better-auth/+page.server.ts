@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
-import { getData } from '$lib/server/data';
+import { addData, removeData, getData } from '$lib/server/data';
 
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
@@ -14,6 +14,25 @@ export const load: PageServerLoad = async (event) => {
 };
 
 export const actions: Actions = {
+	addPressed: async (event) => {
+		await addData(event.locals, {
+			Theme: {
+				primary: '#333'
+			}
+		});
+		return { success: true };
+	},
+
+	removePressed: async (event) => {
+		const formData = await event.request.formData();
+		const key = formData.get('key') as string;
+		const value = formData.get('value') as string | null;
+		// If a value is provided, remove just that item from the array; otherwise delete the whole key
+		const toRemove = value ? { [key]: [value] } : { [key]: null };
+		await removeData(event.locals, toRemove);
+		return { success: true };
+	},
+
 	signOut: async (event) => {
 		await auth.api.signOut({
 			headers: event.request.headers
