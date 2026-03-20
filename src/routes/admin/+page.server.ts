@@ -9,13 +9,7 @@ export const load: PageServerLoad = async (event) => {
     }
     const data = await getData(event.locals);
 
-    const isAdmin =
-        data &&
-        typeof data === 'object' &&
-        'admin' in data &&
-        (data as Record<string, unknown>).admin === true;
-
-    if (!isAdmin) {
+    if (!data?.admin) {
         throw error(403, 'Access denied');
     }
 

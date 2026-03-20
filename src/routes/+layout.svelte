@@ -8,8 +8,8 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div style="
+<!-- <div style="
 	--background-color: {data.theme?.primary ?? '#fff'};
 	">
-	{@render children()}
-</div>
+</div> -->
+{@render children()}
