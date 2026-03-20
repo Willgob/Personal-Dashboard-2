@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageServerData } from './$types';
-	import Modal from '/src/lib/Modal.svelte';
-  	const { data } = $props<PageServerData>();
+	import Modal from '$lib/Modal.svelte';
+	const { data }: { data: PageServerData } = $props();
 	let showModal = $state(false);
 	import './page.css';
 </script>
