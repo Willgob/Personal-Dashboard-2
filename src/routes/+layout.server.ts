@@ -14,7 +14,7 @@ export const load: LayoutServerLoad = async ({ locals }) => {
     const userData = await getData(locals);
     const theme =
         userData && typeof userData === 'object' && !Array.isArray(userData)
-            ? (userData as Record<string, unknown>).Theme as {primary: string, secondary: string} ?? null
+            ? (userData as Record<string, unknown>).theme as {primary: string, secondary: string} ?? null
             : null;
 
     return {

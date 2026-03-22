@@ -1,5 +1,4 @@
 <script lang="ts">
-    import "./main.css";
     import { enhance } from '$app/forms';
 </script>
 
