@@ -1,12 +1,21 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { ActionData } from './$types';
+	import { invalidateAll, goto } from '$app/navigation';
 
 	let { form }: { form: ActionData } = $props();
+
+	function wait() {
+		return async ({ update}: { update: () => Promise<void>}) => {
+			await update();
+			await invalidateAll();
+			await goto('/home');
+		}
+	}
 </script>
 
 <h1>Login</h1>
-<form method="post" action="?/signInEmail" use:enhance>
+<form method="post" action="?/signInEmail" use:enhance={wait}>
 	<label>
 		Email
 		<input type="email" name="email" />
@@ -15,6 +24,7 @@
 		Password
 		<input type="password" name="password" />
 	</label>
+
 	<label>
 		Name (for registration)
 		<input name="name" />

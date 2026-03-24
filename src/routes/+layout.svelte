@@ -1,11 +1,13 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.png';
 	import './main.css';
-	import { onMount } from 'svelte';
+	import { browser } from '$app/environment';
 
 	let { children, data } = $props();
 
-	onMount(() => {
+	$effect(() => {
+		if (!browser) return;
+
 		document.documentElement.style.setProperty('--background-color', data.theme?.primary ?? 'rgb(255,255,255)');
 		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#fff');
 	});

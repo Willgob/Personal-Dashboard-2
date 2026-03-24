@@ -17,6 +17,7 @@ export const load: LayoutServerLoad = async ({ locals }) => {
             ? (userData as Record<string, unknown>).theme as {primary: string, secondary: string} ?? null
             : null;
 
+    console.log('Loaded session and theme:', { session, theme });
     return {
         session,
         theme
