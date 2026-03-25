@@ -1,7 +1,9 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 	import './main.css';
+	import './layout.css'
 	import { browser } from '$app/environment';
+	import { page } from '$app/state';
 
 	let { children, data } = $props();
 
@@ -17,6 +19,11 @@
 	<link rel="icon" href={favicon} />
 </svelte:head>
 
-{@render children()}
+{#if page.url.pathname !== '/home'}
+<div class="navbar">
+	<a href="/">Home</a>	
+</div>
+{/if}
 
+{@render children()}
 
