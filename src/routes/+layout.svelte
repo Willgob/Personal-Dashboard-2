@@ -9,7 +9,7 @@
 		if (!browser) return;
 
 		document.documentElement.style.setProperty('--background-color', data.theme?.primary ?? 'rgb(255,255,255)');
-		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#fff');
+		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#111');
 	});
 </script>
 

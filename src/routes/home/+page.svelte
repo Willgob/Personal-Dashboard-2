@@ -20,7 +20,7 @@
 		<button name="item" value="New Item">Add New Item</button>
 	</form>
 
-	<form method="post" action="?/signOut" use:enhance>
+	<form method="post" action="?/signOut">
 		<button>Sign out</button>
 	</form>
 </Modal>
