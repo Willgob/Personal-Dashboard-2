@@ -1,0 +1,7 @@
+https://coolors.co/1a1a1a-0f0f0f-5e6ad2-e2e2e2-666666
+
+Primary: #0f0f0f
+Secondary: #1A1A1A
+Buttons/Highlight: #5E6AD2
+Text: #E2E2E2
+Secondary Text: #666666
