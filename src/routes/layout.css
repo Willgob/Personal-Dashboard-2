@@ -1,4 +1,10 @@
 .navbar {
-    background-color: #333;
+    background-color: #1A1A1A;
     overflow: hidden;
+    position: sticky;
+    top: 0;
+    margin-top: 0;
+    width: 100%;
+    height: 30px;
+    display: flex;
 }
