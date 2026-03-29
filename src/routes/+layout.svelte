@@ -21,8 +21,11 @@
 
 {#if page.url.pathname !== '/home'}
 <div class="navbar">
-	<a href="/">Home</a>	
+	<div class="navbar-div"><a href="/">Home</a></div>
+	<div class="navbar-div"><a href="/login">Login</a></div>
+	<div class="navbar-div"><a href="/home">Dashboard</a></div>
 </div>
+<div class="navbar-line"></div>
 {/if}
 
 {@render children()}
