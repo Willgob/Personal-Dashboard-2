@@ -27,3 +27,23 @@ html, body{
     background-color: #5c66c7;
     font-weight: 450;
 }
+
+a {
+    color: #5E6AD2;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: transparent;
+    color: #7b85e0;
+}
+
+input {
+    background-color: #101964;
+    color: #E2E2E2;
+    border-color: #101964;
+    border-radius: 2px;
+    border: 1px solid #1e266a;
+    cursor: pointer;
+}
+

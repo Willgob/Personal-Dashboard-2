@@ -6,11 +6,11 @@
 	let { form }: { form: ActionData } = $props();
 
 	function wait() {
-		return async ({ update}: { update: () => Promise<void>}) => {
+		return async ({ update }: { update: () => Promise<void> }) => {
 			await update();
 			await invalidateAll();
 			await goto('/home');
-		}
+		};
 	}
 </script>
 
@@ -29,8 +29,8 @@
 		Name (for registration)
 		<input name="name" />
 	</label>
-	<button>Login</button>
-	<button formaction="?/signUpEmail">Register</button>
+	<button class="button">Login</button>
+	<button class="button" formaction="?/signUpEmail">Register</button>
 </form>
 <p style="color: red">{form?.message ?? ''}</p>
 
@@ -38,5 +38,5 @@
 <form method="post" action="?/signInSocial" use:enhance>
 	<input type="hidden" name="provider" value="github" />
 	<input type="hidden" name="callbackURL" value="/home" />
-	<button>Sign in with GitHub</button>
+	<button class="button">Sign in with GitHub</button>
 </form>
