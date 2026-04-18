@@ -2,7 +2,30 @@ import { db } from "$lib/server/db";
 import { data } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
-export async function getData(locals: App.Locals) {
+type DataPath = string | Array<string | number>;
+
+function getByPath(source: unknown, path: DataPath): unknown {
+    const segments = Array.isArray(path)
+        ? path
+        : path
+              .split('.')
+              .map((segment) => segment.trim())
+              .filter((segment) => segment.length > 0);
+
+    return segments.reduce<unknown>((current, segment) => {
+        if (current === null || current === undefined) return undefined;
+        if (typeof current !== 'object') return undefined;
+
+        if (Array.isArray(current)) {
+            const index = typeof segment === 'number' ? segment : Number(segment);
+            return Number.isInteger(index) ? current[index] : undefined;
+        }
+
+        return (current as Record<string, unknown>)[String(segment)];
+    }, source);
+}
+
+export async function getData(locals: App.Locals, path?: DataPath) {
   const userId = locals.user?.id;
   if (!userId) return null;
 
@@ -12,7 +35,11 @@ export async function getData(locals: App.Locals) {
     .where(eq(data.userId, userId))
     .limit(1);
 
-  return row[0]?.data ?? null;
+    const storedData = row[0]?.data ?? null;
+    if (!path) return storedData;
+
+    const value = getByPath(storedData, path);
+    return value ?? null;
 }
 
 function deepMerge(

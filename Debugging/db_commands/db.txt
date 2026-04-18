@@ -1,0 +1,24 @@
+to use, add stuff into the +page.server.ts e.g.
+
+	addPressed: async (event) => {
+		await addData(event.locals, {
+			Theme: {
+				primary: '#333'
+			}
+		});
+		return { success: true };
+	},
+
+ inside the 
+ export const actions: Actions = {} 
+
+
+u have to import
+import { addData, removeData, getData } from '$lib/server/data';
+to make it work. 
+
+then inside +page.svelte you can add	
+
+<form method="post" action="?/addPressed" use:enhance>
+		<button class="button" name="item" value="New Item">Add New Item</button>
+</form>

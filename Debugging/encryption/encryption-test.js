@@ -1,7 +1,8 @@
 import dotenv from 'dotenv'; //import env lib
 dotenv.config({ path: '../.env' }); //sets the path of the env cause its not in same directory as this test file
 
-const { encrypt, decrypt } = await import('../src/lib/server/encryption.js'); // Import the encryption functions from encryption.js
+import { encrypt } from '$lib/server/encryption.js';
+ // Import the encryption functions from encryption.js
 
 const test_key = "THIS IS A TEST SECRET KEY" // The key that is being encrypted. In production this will be the key the user inputs in settings
 

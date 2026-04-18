@@ -1,0 +1,10 @@
+To add encryption, 
+
+import dotenv from 'dotenv'; //import env lib
+dotenv.config({ path: '../.env' }); //sets the path of the env cause its not in same directory as this test file
+
+const { encrypt, decrypt } = await import('../src/lib/server/encryption.js'); // Import the encryption functions from encryption.js
+
+so to use run 
+const encrypted = encrypt(whatever needs encryption)
+const decrypted = decrypt(whatever needs decryption)

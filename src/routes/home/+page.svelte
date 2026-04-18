@@ -17,6 +17,12 @@
 <p>Your user ID is {data.user.id}.</p>
 <p>THE DATA UH HI</p>
 <p>{JSON.stringify(data.data, null, 2)}</p>
+<p>ENCRYPTED TOKEN: {data.encryptedToken}</p>
+<p> decrypted token: {data.decryptedToken}</p>
+
+<form method="post" action="?/encryptKey" use:enhance>
+	<button class="button" name="item" value="New Item">Encrypt Test Key</button>
+</form>
 
 <Modal bind:showModal>
 	{#snippet header()}

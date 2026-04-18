@@ -3,13 +3,17 @@ import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { addData, removeData, getData } from '$lib/server/data';
+import { encrypt, decrypt } from '$lib/server/encryption.js';
 
 export const load: PageServerLoad = async (event) => {
 	if (!event.locals.user) {
 		return redirect(302, '/login');
 	}
 	const data = await getData(event.locals);
-	return { user: event.locals.user, data };
+	const encryptedToken = await getData(event.locals, 'Keys.encryptedToken');
+	const decryptedToken = decrypt(encryptedToken); 
+
+	return { user: event.locals.user, data, encryptedToken, decryptedToken };
 	
 };
 
@@ -21,6 +25,16 @@ export const actions: Actions = {
 			}
 		});
 		return { success: true };
+	},
+
+	encryptKey: async (event) => {
+			await addData(event.locals, {
+				Keys: {
+					encryptedToken: encrypt('gg IS A TEST SECRET KEY')
+				}
+			});
+			return { success: true };
+		
 	},
 
 	removePressed: async (event) => {
