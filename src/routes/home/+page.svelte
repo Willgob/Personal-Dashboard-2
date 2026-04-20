@@ -2,27 +2,32 @@
 	import { enhance } from '$app/forms';
 	import type { PageServerData } from './$types';
 	import Modal from '$lib/Modal.svelte';
+
 	const { data }: { data: PageServerData } = $props();
 	let showModal = $state(false);
+
 	import './page.css';
+
+	import Widget from '$lib/Widgets/template.svelte';
+	import type {WidgetData} from '$lib/Widgets/template.svelte';
+	const widgets = $derived((data.data?.widgets ?? []) as WidgetData[]);
 </script>
 
-<h1>
-	Hi, {data.user.name}!<button
-		class="button"
-		id="OpenSettingsModal"
-		onclick={() => (showModal = true)}>Settings</button
-	>
-</h1>
-<p>Your user ID is {data.user.id}.</p>
-<p>THE DATA UH HI</p>
-<p>{JSON.stringify(data.data, null, 2)}</p>
-<p>ENCRYPTED TOKEN: {data.encryptedToken}</p>
-<p> decrypted token: {data.decryptedToken}</p>
-
-<form method="post" action="?/encryptKey" use:enhance>
-	<button class="button" name="item" value="New Item">Encrypt Test Key</button>
-</form>
+<div class="main">
+	<header class="main-header">
+		<span class="name">Welcome Back {data.user.name}</span>
+		<button class="button settings-button" id="OpenSettingsModal" onclick={() => (showModal = true)}>
+			Settings
+		</button>
+	</header>
+	
+	<!-- all widgets go here -->
+	<div class="grid">
+		{#each widgets as widget (widget.id)}
+			<Widget {widget} />
+		{/each}
+	</div>
+</div>
 
 <Modal bind:showModal>
 	{#snippet header()}
