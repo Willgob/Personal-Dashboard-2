@@ -8,8 +8,11 @@
 	function wait() {
 		return async ({ update }: { update: () => Promise<void> }) => {
 			await update();
-			await invalidateAll();
-			await goto('/home');
+			// Only go if there is  no error
+			if (!form?.message) {
+				await invalidateAll();
+				await goto('/home');
+			}
 		};
 	}
 </script>

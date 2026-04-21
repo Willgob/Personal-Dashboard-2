@@ -10,10 +10,8 @@ export const load: PageServerLoad = async (event) => {
 		return redirect(302, '/login');
 	}
 	const data = await getData(event.locals);
-	const encryptedToken = await getData(event.locals, 'Keys.encryptedToken');
-	const decryptedToken = decrypt(encryptedToken); 
 
-	return { user: event.locals.user, data, encryptedToken, decryptedToken };
+	return { user: event.locals.user, data};
 	
 };
 
