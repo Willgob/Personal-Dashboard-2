@@ -1,0 +1,12 @@
+:root {
+	--text-color: #fff;
+}
+
+.test {
+	background-color: var(--widget-background);
+}
+
+.widget {
+	background-color: #234634;
+	border-radius: 0.5rem;
+}

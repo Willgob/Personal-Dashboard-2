@@ -9,18 +9,23 @@
 	import './page.css';
 
 	import Widget from '$lib/Widgets/template.svelte';
-	import type {WidgetData} from '$lib/Widgets/template.svelte';
+	import type { WidgetData } from '$lib/Widgets/template.svelte';
 	const widgets = $derived((data.data?.widgets ?? []) as WidgetData[]);
 </script>
 
 <div class="main">
+	<!-- Top Header -->
 	<header class="main-header">
 		<span class="name">Welcome Back {data.user.name}</span>
-		<button class="button settings-button" id="OpenSettingsModal" onclick={() => (showModal = true)}>
+		<button
+			class="button settings-button"
+			id="OpenSettingsModal"
+			onclick={() => (showModal = true)}
+		>
 			Settings
 		</button>
 	</header>
-	
+
 	<!-- all widgets go here -->
 	<div class="grid">
 		{#each widgets as widget (widget.id)}

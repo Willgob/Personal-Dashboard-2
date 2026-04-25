@@ -1,49 +1,49 @@
 @font-face {
-    font-family: "JetBrains Mono";
-    src: url("/Fonts/JetBrainsMono-VariableFont_wght.ttf") format("truetype-variations");
-    font-weight: 100 900;
-    font-style: normal;
+	font-family: 'JetBrains Mono';
+	src: url('/Fonts/JetBrainsMono-VariableFont_wght.ttf') format('truetype-variations');
+	font-weight: 100 900;
+	font-style: normal;
 }
 
-html, body{
-    font-family: "JetBrains Mono", Helvetica, Arial, sans-serif;
-    font-weight: 150;
-    margin: 0;
-    padding: 0;
-    background-color: #0f0f0f;
-    color: #E2E2E2;
+html,
+body {
+	font-family: 'JetBrains Mono', Helvetica, Arial, sans-serif;
+	font-weight: 150;
+	margin: 0;
+	padding: 0;
+	background-color: #0f0f0f;
+	color: #e2e2e2;
 }
 
 .button {
-    background-color: #5E6AD2;
-    color: #E2E2E2;
-    border-color: #5E6AD2;
-    border-radius: 3px;
-    border: 1px solid #5E6AD2;
-    cursor: pointer;
+	background-color: #5e6ad2;
+	color: #e2e2e2;
+	border-color: #5e6ad2;
+	border-radius: 3px;
+	border: 1px solid #5e6ad2;
+	cursor: pointer;
 }
 
 .button:hover {
-    background-color: #5c66c7;
-    font-weight: 450;
+	background-color: #5c66c7;
+	font-weight: 450;
 }
 
 a {
-    color: #5E6AD2;
-    text-decoration: none;
+	color: #5e6ad2;
+	text-decoration: none;
 }
 
 a:hover {
-    background-color: transparent;
-    color: #7b85e0;
+	background-color: transparent;
+	color: #7b85e0;
 }
 
 input {
-    background-color: #101964;
-    color: #E2E2E2;
-    border-color: #101964;
-    border-radius: 2px;
-    border: 1px solid #1e266a;
-    cursor: pointer;
+	background-color: #101964;
+	color: #e2e2e2;
+	border-color: #101964;
+	border-radius: 2px;
+	border: 1px solid #1e266a;
+	cursor: pointer;
 }
-
