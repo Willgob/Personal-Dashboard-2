@@ -16,7 +16,10 @@
 			data.theme?.primary ?? '#0f0f0f'
 		);
 
-		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#E2E2E2');
+		document.documentElement.style.setProperty(
+			'--text-color', 
+			data.theme?.secondary ?? '#E2E2E2'
+		);
 
 		document.documentElement.style.setProperty(
 			'--widget-background',
