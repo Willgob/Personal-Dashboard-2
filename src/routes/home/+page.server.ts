@@ -11,8 +11,7 @@ export const load: PageServerLoad = async (event) => {
 	}
 	const data = await getData(event.locals);
 
-	return { user: event.locals.user, data};
-	
+	return { user: event.locals.user, data };
 };
 
 export const actions: Actions = {
@@ -25,30 +24,24 @@ export const actions: Actions = {
 		return { success: true };
 	},
 
-	encryptKey: async (event) => {
-			await addData(event.locals, {
-				Keys: {
-					encryptedToken: encrypt('gg IS A TEST SECRET KEY')
-				}
-			});
-			return { success: true };
-		
-	},
-
-	removePressed: async (event) => {
-		const formData = await event.request.formData();
-		const key = formData.get('key') as string;
-		const value = formData.get('value') as string | null;
-		// If a value is provided, remove just that item from the array; otherwise delete the whole key
-		const toRemove = value ? { [key]: [value] } : { [key]: null };
-		await removeData(event.locals, toRemove);
-		return { success: true };
-	},
-
 	signOut: async (event) => {
 		await auth.api.signOut({
 			headers: event.request.headers
 		});
 		return redirect(302, '/login');
+	},
+
+	setFont: async (event) => {
+		const formData = await event.request.formData();
+		const font = formData.get('font') as string;
+		const font_name = formData.get('font_name') as string;
+		console.log(font);
+		await addData(event.locals, {
+			theme: {
+				font,
+				font_name
+			}
+		});
+		return redirect(302, '/home');
 	}
 };

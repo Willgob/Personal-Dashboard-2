@@ -13,23 +13,29 @@
 
 		document.documentElement.style.setProperty(
 			'--background-color',
-			data.theme?.primary ?? '#0f0f0f'
+			data.theme?.background ?? '#0f0f0f'
 		);
 
-		document.documentElement.style.setProperty(
-			'--text-color', 
-			data.theme?.secondary ?? '#E2E2E2'
-		);
+		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#E2E2E2');
 
 		document.documentElement.style.setProperty(
 			'--widget-background',
 			data.theme?.widget_background ?? '#E2E2E2'
 		);
+
+		document.documentElement.style.setProperty('--font', data.theme?.font_name ?? 'Arial');
 	});
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		href={data.theme?.font ??
+			'https://fonts.googleapis.com/css2?family=Playwrite+NZ+Guides&display=swap'}
+		rel="stylesheet"
+	/>
 </svelte:head>
 
 {#if page.url.pathname !== '/home'}

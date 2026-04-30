@@ -1,0 +1,19 @@
+{
+	"theme": {
+		"font": "https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap",
+		"font_name": "Coming Soon",
+		"background": "#000",
+		"widget_background": "#ff4040"
+	},
+	"widgets": [
+		{
+			"x": 1,
+			"y": 1,
+			"id": "1",
+			"name": "Clock",
+			"type": "clock",
+			"width": 1,
+			"height": 1
+		}
+	]
+}

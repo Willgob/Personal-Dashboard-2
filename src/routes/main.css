@@ -6,8 +6,9 @@
 }
 
 html,
-body {
-	font-family: 'JetBrains Mono', Helvetica, Arial, sans-serif;
+body,
+button {
+	font-family: var(--font), Arial, sans-serif;
 	font-weight: 150;
 	margin: 0;
 	padding: 0;

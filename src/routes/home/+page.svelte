@@ -42,6 +42,16 @@
 		<button class="button" name="item" value="New Item">Add New Item</button>
 	</form>
 
+	<form method="post" action="?/setFont">
+		<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />
+		<input
+			type="text"
+			name="font_name"
+			placeholder={data.data?.theme.font_name ?? 'No font name set'}
+		/>
+		<button>Save Font</button>
+	</form>
+
 	<form method="post" action="?/signOut">
 		<button class="button">Sign out</button>
 	</form>
