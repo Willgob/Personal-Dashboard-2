@@ -1,12 +1,11 @@
-:root {
+/* :root {
 	--text-color: #fff;
-}
-
-.test {
-	background-color: var(--widget-background);
-}
+	--background-color: #234634;
+} */
 
 .widget {
-	background-color: #234634;
-	border-radius: 0.5rem;
+	background-color: var(--widget-background);
+	/* background-color: #000; */
+	border-radius: 0.7rem;
+	padding: 0.5rem;
 }

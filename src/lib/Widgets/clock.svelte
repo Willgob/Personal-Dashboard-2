@@ -21,4 +21,4 @@
 	);
 </script>
 
-<div class="test">test: {hours}:{minutes}:{seconds} {date}</div>
+<div class="test">{hours}:{minutes}:{seconds} {date}</div>
