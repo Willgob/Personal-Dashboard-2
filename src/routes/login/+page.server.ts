@@ -3,6 +3,28 @@ import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { APIError } from 'better-auth/api';
+import { addData, removeData, getData } from '$lib/server/data';
+import { Result } from 'pg';
+
+const SignupData = {
+	theme: {
+		font: 'https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap',
+		font_name: 'Coming Soon',
+		background: '#000',
+		widget_background: '#ff4040'
+	},
+	widgets: [
+		{
+			x: 1,
+			y: 1,
+			id: '1',
+			name: 'Clock',
+			type: 'clock',
+			width: 1,
+			height: 1
+		}
+	]
+};
 
 export const load: PageServerLoad = async (event) => {
 	if (event.locals.user) {
@@ -41,7 +63,7 @@ export const actions: Actions = {
 		const name = formData.get('name')?.toString() ?? '';
 
 		try {
-			await auth.api.signUpEmail({
+			const result = await auth.api.signUpEmail({
 				body: {
 					email,
 					password,
@@ -49,6 +71,8 @@ export const actions: Actions = {
 					callbackURL: '/auth/verification-success'
 				}
 			});
+			event.locals.user = result.user;
+			await addData(event.locals, SignupData);
 		} catch (error) {
 			if (error instanceof APIError) {
 				return fail(400, { message: error.message || 'Registration failed' });
@@ -58,6 +82,7 @@ export const actions: Actions = {
 
 		return redirect(302, '/home');
 	},
+
 	signInSocial: async (event) => {
 		const formData = await event.request.formData();
 		const provider = formData.get('provider')?.toString() ?? 'github';
@@ -75,4 +100,4 @@ export const actions: Actions = {
 		}
 		return fail(400, { message: 'Social sign-in failed' });
 	}
-	};
+};

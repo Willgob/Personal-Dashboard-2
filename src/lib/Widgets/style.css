@@ -9,3 +9,20 @@
 	border-radius: 0.7rem;
 	padding: 0.5rem;
 }
+
+.hide-header {
+	position: fixed;
+	top: 0.5rem;
+	right: 0.5rem;
+	background: transparent;
+	border: 1px solid;
+	color: #555;
+	cursor: pointer;
+	font-size: 1rem;
+	z-index: 100;
+	padding: 0.25rem 0.5rem;
+}
+
+.hide-header-btn:hover {
+	color: var(--text-color);
+}

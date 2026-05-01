@@ -12,15 +12,22 @@
 <dialog
 	bind:this={dialog}
 	onclose={() => (showModal = false)}
-	onclick={(e) => { if (e.target === dialog) dialog.close(); }}
+	onclick={(e) => {
+		if (e.target === dialog) dialog.close();
+	}}
 >
 	<div>
 		{@render header?.()}
 		<hr />
 		{@render children?.()}
 		<hr />
-		<!-- svelte-ignore a11y_autofocus -->
-		<button autofocus onclick={() => dialog.close()}>close modal</button>
+		<span style="display: flex; gap: 0.67rem;">
+			<!-- svelte-ignore a11y_autofocus -->
+			<button autofocus onclick={() => dialog.close()} class="button">close modal</button>
+			<form method="post" action="?/signOut">
+				<button class="button">Sign out</button>
+			</form>
+		</span>
 	</div>
 </dialog>
 
@@ -34,14 +41,14 @@
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.3);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
+		backdrop-filter: blur(3px);
+		-webkit-backdrop-filter: blur(3px);
 	}
 	dialog > div {
 		padding: 1em;
 	}
 	dialog[open] {
-		animation: zoom 1.0s cubic-bezier(0.34, 1.56, 0.64, 1);
+		animation: zoom 1s cubic-bezier(0.34, 1.56, 0.64, 1);
 	}
 	@keyframes zoom {
 		from {

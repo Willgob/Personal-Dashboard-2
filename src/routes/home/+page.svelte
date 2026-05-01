@@ -5,26 +5,40 @@
 
 	const { data }: { data: PageServerData } = $props();
 	let showModal = $state(false);
+	let showHeader = $state(true);
 
 	import './page.css';
 
 	import Widget from '$lib/Widgets/template.svelte';
 	import type { WidgetData } from '$lib/Widgets/template.svelte';
 	const widgets = $derived((data.data?.widgets ?? []) as WidgetData[]);
+
+	import openHeader from '$lib/assets/openheader.svg';
+	import closeHeader from '$lib/assets/closeheader.svg';
 </script>
 
 <div class="main">
 	<!-- Top Header -->
-	<header class="main-header">
-		<span class="name">Welcome Back {data.user.name}</span>
-		<button
-			class="button settings-button"
-			id="OpenSettingsModal"
-			onclick={() => (showModal = true)}
-		>
-			Settings
-		</button>
-	</header>
+	<button class="hide-header" onclick={() => (showHeader = !showHeader)}>
+		{#if showHeader}
+			<img src={openHeader} alt="open header" width="16" height="16" />
+		{:else}
+			<img src={closeHeader} alt="close header" width="16" height="16" />
+		{/if}
+	</button>
+
+	{#if showHeader}
+		<header class="main-header">
+			<span class="name">Welcome Back {data.user.name}</span>
+			<button
+				class="button settings-button"
+				id="OpenSettingsModal"
+				onclick={() => (showModal = true)}
+			>
+				Settings
+			</button>
+		</header>
+	{/if}
 
 	<!-- all widgets go here -->
 	<div class="grid">
@@ -36,11 +50,8 @@
 
 <Modal bind:showModal>
 	{#snippet header()}
-		<h2>Settings</h2>
+		<h2 style="color: #fff">Settings</h2>
 	{/snippet}
-	<form method="post" action="?/addPressed" use:enhance>
-		<button class="button" name="item" value="New Item">Add New Item</button>
-	</form>
 
 	<form method="post" action="?/setFont">
 		<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />
@@ -49,10 +60,6 @@
 			name="font_name"
 			placeholder={data.data?.theme.font_name ?? 'No font name set'}
 		/>
-		<button>Save Font</button>
-	</form>
-
-	<form method="post" action="?/signOut">
-		<button class="button">Sign out</button>
+		<button class="button">Save Font</button>
 	</form>
 </Modal>
