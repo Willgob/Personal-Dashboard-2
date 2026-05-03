@@ -21,9 +21,9 @@
 	<!-- Top Header -->
 	<button class="hide-header" onclick={() => (showHeader = !showHeader)}>
 		{#if showHeader}
-			<img src={openHeader} alt="open header" width="16" height="16" />
-		{:else}
 			<img src={closeHeader} alt="close header" width="16" height="16" />
+		{:else}
+			<img src={openHeader} alt="open header" width="16" height="16" />
 		{/if}
 	</button>
 
@@ -60,6 +60,11 @@
 			name="font_name"
 			placeholder={data.data?.theme.font_name ?? 'No font name set'}
 		/>
+		<button class="button">Save Font</button>
+	</form>
+
+	<form method="post" action="?/setFont">
+		<input type="number" name="font" placeholder={data.data?.widget ?? 'No font set'} />
 		<button class="button">Save Font</button>
 	</form>
 </Modal>
