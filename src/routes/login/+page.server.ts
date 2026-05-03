@@ -3,8 +3,7 @@ import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
 import { APIError } from 'better-auth/api';
-import { addData, removeData, getData } from '$lib/server/data';
-import { Result } from 'pg';
+import { addData} from '$lib/server/data';
 
 const SignupData = {
 	theme: {

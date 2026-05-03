@@ -43,3 +43,8 @@
 	<input type="hidden" name="callbackURL" value="/home" />
 	<button class="button">Sign in with GitHub</button>
 </form>
+<form method="post" action="?/signInSocial" use:enhance>
+	<input type="hidden" name="provider" value="google" />
+	<input type="hidden" name="callbackURL" value="/home" />
+	<button class="button">Sign in with Google</button>
+</form>
