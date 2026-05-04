@@ -43,5 +43,8 @@ export const actions: Actions = {
 			}
 		});
 		return redirect(302, '/home');
+	},
+
+	editWidgets: async (event) => {
 	}
 };

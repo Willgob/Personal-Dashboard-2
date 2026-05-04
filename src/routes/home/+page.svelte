@@ -63,8 +63,12 @@
 		<button class="button">Save Font</button>
 	</form>
 
-	<form method="post" action="?/setFont">
+	<form method="post" action="?/editWidgets">
+		<button class="button" type="button">Widget Settings</button>
+	</form>
+
+	<!-- <form method="post" action="?/setFont">
 		<input type="number" name="font" placeholder={data.data?.widget ?? 'No font set'} />
 		<button class="button">Save Font</button>
-	</form>
+	</form> -->
 </Modal>
