@@ -7,6 +7,8 @@
 	let showModal = $state(false);
 	let showHeader = $state(true);
 
+	let editMode = $state(false);
+
 	import './page.css';
 
 	import Widget from '$lib/Widgets/template.svelte';
@@ -37,13 +39,20 @@
 			>
 				Settings
 			</button>
+			<button class="button" onclick={() => (editMode = !editMode)}>
+				{#if editMode}
+					Save
+				{:else}
+					Edit
+				{/if}
+			</button>
 		</header>
 	{/if}
 
 	<!-- all widgets go here -->
-	<div class="grid">
+	<div class="grid" class:edit-mode={editMode}>
 		{#each widgets as widget (widget.id)}
-			<Widget {widget} />
+			<Widget {widget} {editMode} />
 		{/each}
 	</div>
 </div>
@@ -61,10 +70,6 @@
 			placeholder={data.data?.theme.font_name ?? 'No font name set'}
 		/>
 		<button class="button">Save Font</button>
-	</form>
-
-	<form method="post" action="?/editWidgets">
-		<button class="button" type="button">Widget Settings</button>
 	</form>
 
 	<!-- <form method="post" action="?/setFont">

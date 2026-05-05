@@ -26,3 +26,12 @@
 .hide-header-btn:hover {
 	color: var(--text-color);
 }
+
+.widget.edit-mode {
+	cursor: pointer;
+	outline: 1px dashed #5e6ad2;
+}
+
+.widget.edit-mode:hover {
+	outline: 2px solid #5e6ad2;
+}
