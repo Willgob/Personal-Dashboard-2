@@ -3,20 +3,28 @@
 	import type { PageServerData } from './$types';
 	import Modal from '$lib/Modal.svelte';
 
-	const { data }: { data: PageServerData } = $props();
-	let showModal = $state(false);
-	let showHeader = $state(true);
-
-	let editMode = $state(false);
-
-	import './page.css';
-
 	import Widget from '$lib/Widgets/template.svelte';
 	import type { WidgetData } from '$lib/Widgets/template.svelte';
 	const widgets = $derived((data.data?.widgets ?? []) as WidgetData[]);
 
 	import openHeader from '$lib/assets/openheader.svg';
 	import closeHeader from '$lib/assets/closeheader.svg';
+
+	const { data }: { data: PageServerData } = $props();
+	let showModal = $state(false);
+	let showHeader = $state(true);
+
+	let editMode = $state(false);
+	let selectedWidget = $state<WidgetData | null>(null);
+
+	import './page.css';
+
+	function onWidgetClick(widget: WidgetData) {
+		if (!editMode) return;
+		selectedWidget = widget;
+		showModal = true;
+	}
+
 </script>
 
 <div class="main">
@@ -52,7 +60,7 @@
 	<!-- all widgets go here -->
 	<div class="grid" class:edit-mode={editMode}>
 		{#each widgets as widget (widget.id)}
-			<Widget {widget} {editMode} />
+			<Widget {widget} {editMode} onclick={() => onWidgetClick(widget)}/>
 		{/each}
 	</div>
 </div>
@@ -62,15 +70,19 @@
 		<h2 style="color: #fff">Settings</h2>
 	{/snippet}
 
-	<form method="post" action="?/setFont">
-		<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />
-		<input
-			type="text"
-			name="font_name"
-			placeholder={data.data?.theme.font_name ?? 'No font name set'}
-		/>
-		<button class="button">Save Font</button>
-	</form>
+	{#if selectedWidget}
+		<p style="color: #fff">Widget ID: {selectedWidget.id}</p>
+	{:else}
+		<form method="post" action="?/setFont">
+			<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />
+			<input
+				type="text"
+				name="font_name"
+				placeholder={data.data?.theme.font_name ?? 'No font name set'}
+			/>
+			<button class="button">Save Font</button>
+		</form>
+	{/if}
 
 	<!-- <form method="post" action="?/setFont">
 		<input type="number" name="font" placeholder={data.data?.widget ?? 'No font set'} />
