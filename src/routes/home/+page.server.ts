@@ -45,6 +45,19 @@ export const actions: Actions = {
 		return redirect(302, '/home');
 	},
 
-	editWidgets: async (event) => {
+	setWidgetX: async (event) => {
+		const formData = await event.request.formData();
+		const widgetId = formData.get('widgetId') as string;
+		const newX = Number(formData.get('setWidgetX'));
+
+		await addData(event.locals, {
+			widgets: [
+				{
+					id: widgetId,
+					x: newX
+				}
+			]
+		});
+		return redirect(302, '/home');
 	}
 };

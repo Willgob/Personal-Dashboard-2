@@ -24,7 +24,6 @@
 		selectedWidget = widget;
 		showModal = true;
 	}
-
 </script>
 
 <div class="main">
@@ -60,18 +59,23 @@
 	<!-- all widgets go here -->
 	<div class="grid" class:edit-mode={editMode}>
 		{#each widgets as widget (widget.id)}
-			<Widget {widget} {editMode} onclick={() => onWidgetClick(widget)}/>
+			<Widget {widget} {editMode} onclick={() => onWidgetClick(widget)} />
 		{/each}
 	</div>
 </div>
 
-<Modal bind:showModal>
+<Modal bind:showModal onclose={() => (selectedWidget = null)}>
 	{#snippet header()}
 		<h2 style="color: #fff">Settings</h2>
 	{/snippet}
 
 	{#if selectedWidget}
 		<p style="color: #fff">Widget ID: {selectedWidget.id}</p>
+		<form method="post" action="?/setWidgetX">
+			<input type="hidden" name="widgetId" value={selectedWidget.id} />
+			<input type="number" name="setWidgetX" placeholder={selectedWidget.x} min="0" max="12" />
+			<button class="button" type="submit">Save</button>
+		</form>
 	{:else}
 		<form method="post" action="?/setFont">
 			<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />

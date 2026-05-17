@@ -1,5 +1,5 @@
 <script>
-	let { showModal = $bindable(), header, children } = $props();
+	let { showModal = $bindable(), header, children, onclose } = $props();
 
 	let dialog = $state(); // HTMLDialogElement
 
@@ -11,7 +11,10 @@
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions -->
 <dialog
 	bind:this={dialog}
-	onclose={() => (showModal = false)}
+	onclose={() => {
+		showModal = false;
+		onclose?.();
+	}}
 	onclick={(e) => {
 		if (e.target === dialog) dialog.close();
 	}}
