@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import type { Actions } from './$types';
 import type { PageServerLoad } from './$types';
 import { auth } from '$lib/server/auth';
-import { addData, removeData, getData } from '$lib/server/data';
+import { addData, removeData, getData, updateWidget } from '$lib/server/data';
 import { encrypt, decrypt } from '$lib/server/encryption.js';
 
 export const load: PageServerLoad = async (event) => {
@@ -58,6 +58,28 @@ export const actions: Actions = {
 				}
 			]
 		});
+		return redirect(302, '/home');
+	},
+
+	updateWidget: async (event) => {
+		const formData = await event.request.formData();
+		const widgetID = formData.get('widgetId') as string;
+
+		const updates: Record<string, unknown> = {};
+
+		const x = Number(formData.get('x'));
+		const y = Number(formData.get('y'));
+		const width = Number(formData.get('width'));
+		const height = Number(formData.get('height'));
+		const timeFormat = formData.get('Time Format') as string;
+
+		if (x) updates.x = Number(x);
+		if (y) updates.y = Number(y);
+		if (width) updates.width = Number(width);
+		if (height) updates.height = Number(height);
+		if (timeFormat) updates.timeFormat = timeFormat;
+
+		await updateWidget(event.locals, widgetID, updates);
 		return redirect(302, '/home');
 	}
 };

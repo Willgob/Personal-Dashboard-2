@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageServerData } from './$types';
-	import Modal from '$lib/Modal.svelte';
+	import Modal from '$lib/Settings_modal.svelte';
 
 	import Widget from '$lib/Widgets/template.svelte';
 	import type { WidgetData } from '$lib/Widgets/template.svelte';
@@ -64,30 +64,7 @@
 	</div>
 </div>
 
-<Modal bind:showModal onclose={() => (selectedWidget = null)}>
-	{#snippet header()}
-		<h2 style="color: #fff">Settings</h2>
-	{/snippet}
-
-	{#if selectedWidget}
-		<p style="color: #fff">Widget ID: {selectedWidget.id}</p>
-		<form method="post" action="?/setWidgetX">
-			<input type="hidden" name="widgetId" value={selectedWidget.id} />
-			<input type="number" name="setWidgetX" placeholder={selectedWidget.x} min="0" max="12" />
-			<button class="button" type="submit">Save</button>
-		</form>
-	{:else}
-		<form method="post" action="?/setFont">
-			<input type="url" name="font" placeholder={data.data?.theme.font ?? 'No font set'} />
-			<input
-				type="text"
-				name="font_name"
-				placeholder={data.data?.theme.font_name ?? 'No font name set'}
-			/>
-			<button class="button">Save Font</button>
-		</form>
-	{/if}
-
+<Modal bind:showModal bind:selectedWidget {data} onclose={() => (selectedWidget = null)}>
 	<!-- <form method="post" action="?/setFont">
 		<input type="number" name="font" placeholder={data.data?.widget ?? 'No font set'} />
 		<button class="button">Save Font</button>
