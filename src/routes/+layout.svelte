@@ -11,19 +11,15 @@
 	$effect(() => {
 		if (!browser) return;
 
-		document.documentElement.style.setProperty(
-			'--background-color',
-			data.theme?.background ?? '#0f0f0f'
-		);
+		document.documentElement.style.setProperty( '--background-color', data.theme?.background ?? '#0f0f0f' ); // background color
 
-		document.documentElement.style.setProperty('--text-color', data.theme?.secondary ?? '#E2E2E2');
+		document.documentElement.style.setProperty('--text-color', data.theme?.text_color ?? '#E2E2E2'); //text color
 
-		document.documentElement.style.setProperty(
-			'--widget-background',
-			data.theme?.widget_background ?? '#E2E2E2'
-		);
+		document.documentElement.style.setProperty('--widget-background', data.theme?.widget_background ?? '#E2E2E2'); // widget background color
 
-		document.documentElement.style.setProperty('--font', data.theme?.font_name ?? 'Arial');
+		// document
+
+		document.documentElement.style.setProperty('--font', data.theme?.font_name ?? 'Arial'); // font family
 	});
 </script>
 
