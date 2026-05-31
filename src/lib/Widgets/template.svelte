@@ -1,5 +1,6 @@
 <script>
 	import Clock from './clock.svelte';
+	import Hackatime from './hackatime.svelte';
 	const { widget, editMode = false, onclick } = $props();
 	import './style.css';
 </script>
@@ -14,5 +15,9 @@
 >
 	{#if widget.type === 'clock'}
 		<Clock {widget}/>
+	{/if}
+
+	{#if widget.type === 'hackatime'}
+		<Hackatime {widget}/>
 	{/if}
 </div>

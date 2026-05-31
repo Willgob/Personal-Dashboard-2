@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import type { PageServerData } from './$types';
-	import Modal from '$lib/Settings_modal.svelte';
+	import Modal from '$lib/home_modal.svelte';
 
 	import Widget from '$lib/Widgets/template.svelte';
 	import type { WidgetData } from '$lib/Widgets/template.svelte';

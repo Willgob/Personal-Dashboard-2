@@ -12,11 +12,9 @@ export const load: LayoutServerLoad = async ({ locals }) => {
 	}
 
 	const userData = await getData(locals);
-	const theme =
-		userData && typeof userData === 'object' && !Array.isArray(userData)
-			? (((userData as Record<string, unknown>).theme as { primary: string; secondary: string; text_color: string; background:string; widget_background:string; font_name:string; }) ??
-				null)
-			: null;
+	const theme = userData && typeof userData === 'object' && !Array.isArray(userData)
+		? ((userData as Record<string, unknown>).theme as Record<string, string> ?? null)
+		: null;
 
 	console.log('Loaded session and theme:', { session, theme });
 	return {

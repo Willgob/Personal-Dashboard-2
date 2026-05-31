@@ -40,7 +40,8 @@ a:hover {
 	color: #7b85e0;
 }
 
-input {
+input,
+.dropdown {
 	background-color: #101964;
 	color: #e2e2e2;
 	border-color: #101964;

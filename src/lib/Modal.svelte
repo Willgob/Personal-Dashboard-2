@@ -26,7 +26,7 @@
 		<hr />
 		<span style="display: flex; gap: 0.67rem;">
 			<!-- svelte-ignore a11y_autofocus -->
-			<button autofocus onclick={() => dialog.close()} class="button">close modal</button>
+			<button autofocus onclick={() => dialog.close()} class="button">close</button>
 			<form method="post" action="?/signOut">
 				<button class="button">Sign out</button>
 			</form>

@@ -26,20 +26,21 @@
 			<form method="post" action="?/updateWidget">
 				<input type="hidden" name="widgetId" value={selectedWidget.id} />
 				<span style="color: #fff">X:</span>
-				<input type="number" name="x" placeholder={selectedWidget.x} min="0" max="12" />
+				<input type="number" name="x" class="number-input" placeholder={selectedWidget.x} min="0" max="12" />
 				<br />
 				<span style="color: #fff">Y:</span>
-				<input type="number" name="y" placeholder={selectedWidget.y} min="0" max="12" />
+				<input type="number" name="y" class="number-input" placeholder={selectedWidget.y} min="0" max="12" />
 				<br />
 				<span style="color: #fff">Width:</span>
-				<input type="number" name="width" placeholder={selectedWidget.width} min="0" max="12" />
+				<input type="number" name="width" class="number-input" placeholder={selectedWidget.width} min={selectedWidget.width_min} max="12" />
 				<br />
 				<span style="color: #fff">Height:</span>
-				<input type="number" name="height" placeholder={selectedWidget.height} min="0" max="12" />
+				<input type="number" name="height" class="number-input" placeholder={selectedWidget.height} min={selectedWidget.height_min} max="12" />
+
 				{#if selectedWidget.type === 'clock'}
 					<br />
 					<span style="color: #fff">Time Format:</span>
-					<select name="Time Format"> 
+					<select class="dropdown" name="Time Format"> 
 						<option value="h12" selected={selectedWidget.timeFormat === 'h12'}>12-hour</option>
 						<option value="h24" selected={selectedWidget.timeFormat === 'h24'}>24-hour</option>
 					</select>	
@@ -50,6 +51,15 @@
 						<option value="utc" selected={selectedWidget.timeZone === 'utc'}>UTC</option>
 					</select> -->
 				{/if}
+
+				{#if selectedWidget.type === 'hackatime'}
+					<br />
+					<span style="color: #fff">api:</span>
+					<input type="text" name="api" class="number-input" placeholder={selectedWidget.location ?? 'Enter api'} />
+					<input type="text" name="username" class="number-input" placeholder={selectedWidget.username ?? 'Enter username'} />
+						<!-- <span style="color: #fff">Time Zone:</span> -->
+				{/if}
+
 				<hr />
 				<button class="button" type="submit">Save</button>
 			</form>
@@ -61,7 +71,11 @@
 					name="font_name"
 					placeholder={data?.data?.theme.font_name ?? 'No font name set'}
 				/>
+				<br />
 				<button class="button">Save Font</button>
+			</form>
+			<form method="post" action="?/addWidget">
+				<button class="button" type="submit">Add Widget</button>
 			</form>
 		{/if}
 		<hr />

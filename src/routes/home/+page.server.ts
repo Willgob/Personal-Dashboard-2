@@ -11,7 +11,16 @@ export const load: PageServerLoad = async (event) => {
 	}
 	const data = await getData(event.locals);
 
-	return { user: event.locals.user, data };
+	const widgets = data?.widgets ?? [];
+	const decryptedWidgets = widgets.map((w: any) => ({
+		...w,
+		api: w.api ? decrypt(w.api) : null
+	}));
+
+	return { 
+		user: event.locals.user, 
+		data: { ...data, widgets: decryptedWidgets }
+	};
 };
 
 export const actions: Actions = {
@@ -45,22 +54,6 @@ export const actions: Actions = {
 		return redirect(302, '/home');
 	},
 
-	setWidgetX: async (event) => {
-		const formData = await event.request.formData();
-		const widgetId = formData.get('widgetId') as string;
-		const newX = Number(formData.get('setWidgetX'));
-
-		await addData(event.locals, {
-			widgets: [
-				{
-					id: widgetId,
-					x: newX
-				}
-			]
-		});
-		return redirect(302, '/home');
-	},
-
 	updateWidget: async (event) => {
 		const formData = await event.request.formData();
 		const widgetID = formData.get('widgetId') as string;
@@ -72,14 +65,22 @@ export const actions: Actions = {
 		const width = Number(formData.get('width'));
 		const height = Number(formData.get('height'));
 		const timeFormat = formData.get('Time Format') as string;
+		const api = formData.get('api') as string;
+		const username = formData.get('username') as string
 
 		if (x) updates.x = Number(x);
 		if (y) updates.y = Number(y);
 		if (width) updates.width = Number(width);
 		if (height) updates.height = Number(height);
 		if (timeFormat) updates.timeFormat = timeFormat;
+		if (api) updates.api = encrypt(api);
+		if (username) updates.username = username;
 
 		await updateWidget(event.locals, widgetID, updates);
 		return redirect(302, '/home');
+	},
+
+	addWidget: async (event) => {
+		return redirect(302, '/add-widget');
 	}
 };

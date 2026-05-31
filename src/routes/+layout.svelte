@@ -17,8 +17,6 @@
 
 		document.documentElement.style.setProperty('--widget-background', data.theme?.widget_background ?? '#E2E2E2'); // widget background color
 
-		// document
-
 		document.documentElement.style.setProperty('--font', data.theme?.font_name ?? 'Arial'); // font family
 	});
 </script>
@@ -26,7 +24,7 @@
 <svelte:head>
 	<link rel="icon" href={favicon} />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 	<link
 		href={data.theme?.font ??
 			'https://fonts.googleapis.com/css2?family=Playwrite+NZ+Guides&display=swap'}

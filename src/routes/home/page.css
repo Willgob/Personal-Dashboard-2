@@ -31,3 +31,9 @@ html {
 	grid-auto-rows: 80px;
 	gap: 0.5rem;
 }
+
+.number-input {
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+	appearance: textfield;
+}
